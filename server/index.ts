@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 // rest of the code remains same
 
 import fileUpload, { FileArray, UploadedFile } from "express-fileupload";
@@ -20,8 +20,7 @@ const PORT = 8000;
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 
 
-app.post("/picture", async (req, res) => {
-  //console.log(req);
+app.post("/picture", async (req:Request, res:Response) => {
   try {
     if(!req.files){
       res.send({
