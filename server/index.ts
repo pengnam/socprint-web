@@ -1,10 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 // rest of the code remains same
 
-import fileUpload, { FileArray, UploadedFile } from "express-fileupload";
+import fileUpload from "express-fileupload";
 import cors from "cors";
 import morgan from "morgan";
-import { exit } from 'node:process';
 
 
 const app = express();
@@ -17,10 +16,10 @@ app.use(fileUpload({
   createParentPath: true
 }))
 const PORT = 8000;
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
+app.get('/', (req, res) => res.send('Yo this is the API server go back to where you came from'));
 
 
-app.post("/picture", async (req:Request, res:Response) => {
+app.post("/quota", async (req:Request, res:Response) => {
   try {
     if(!req.files){
       res.send({
@@ -50,5 +49,5 @@ app.post("/picture", async (req:Request, res:Response) => {
 
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });

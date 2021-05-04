@@ -4,15 +4,18 @@ class Api {
         let PLACEHOLDER = true;
         let baseUrl;
         if (PLACEHOLDER) {
-            baseUrl = "https://localhost:8000/";
+            baseUrl = "http://localhost:8000";
         } else {
-            baseUrl = "https://api.socprint.xyz/";
+            baseUrl = "https://api.socprint.xyz";
         }
         return baseUrl;
     }
 
     static printUrl(): string {
         return `${Api.baseUrl()}/print`
+    } 
+    static quotaUrl(): string {
+        return `${Api.baseUrl()}/quota`
     } 
 }
 
