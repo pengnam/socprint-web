@@ -1,9 +1,8 @@
 class Api {
     static baseUrl(): string{
         //TODO: Fix
-        let PLACEHOLDER = true;
         let baseUrl;
-        if (PLACEHOLDER) {
+        if (process.env.NODE_ENV == "development") {
             baseUrl = "http://localhost:8000";
         } else {
             baseUrl = "https://api.socprint.xyz";
