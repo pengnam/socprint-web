@@ -55,13 +55,13 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           color: inherit;
           text-decoration: none;
         }
-        .title a {
+        .description a {
           color: #0070f3;
           text-decoration: none;
         }
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
+        .description a:hover,
+        .description a:focus,
+        .description a:active {
           text-decoration: underline;
         }
         .title {

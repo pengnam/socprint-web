@@ -6,7 +6,7 @@ const IndexPage: FC = (): ReactElement => (
   <Layout title="SOCprint">
     <div className="container">
         <h1 className="title">SOCprint</h1>
-        <h2 className="description">POSIX™-compliant, zero-dependency shell script to print stuff in NUS SoC</h2>
+        <h2 className="description">Using a <a href="https://github.com/dlqs/SOCprint">POSIX™-compliant, zero-dependency shell script</a> to print stuff in NUS SoC</h2>
         <PrintForm/>
     </div>
   </Layout>

@@ -8,7 +8,8 @@ function PrintForm() {
      const formData = new FormData()
      formData.append("sunfire_id", data.sunfire_id)
      formData.append("password", data.password)
-     formData.append("picture", data.picture[0])
+     formData.append("printer", data.printer)
+     formData.append("file", data.file[0])
 
      const res = await fetch(Api.printUrl(), {
        method: "POST",
@@ -25,8 +26,11 @@ function PrintForm() {
        <label htmlFor="password">password</label>
        <input {...register('password')} type="password" />
        <br/>
+       <label htmlFor="printer">printer</label>
+       <input {...register('printer')} type="text" />
+       <br/>
        <label htmlFor="file">file</label>
-       <input {...register('picture')} type="file" />
+       <input {...register('file')} type="file" />
        <br/>
        <button>Submit</button>
      </form>
