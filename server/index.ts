@@ -22,6 +22,10 @@ app.use(fileUpload({
 }))
 const PORT = 8000;
 
+app.get("/test", async (req:Request, res:Response) => {
+  res.send("its working")
+})
+
 app.post("/print", async (req:Request, res:Response) => {
   try {
     if(!req.files){
