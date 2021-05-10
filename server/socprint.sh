@@ -2,7 +2,7 @@
 
 set -euf
 
-host='sunfire.comp.nus.edu.sg'
+host='localhost'
 default_script='/usr/local/bin/socprint.sh'
 
 usage() {
@@ -204,7 +204,7 @@ fi
 check_username() {
     [ -z "${1-}" ] && die "Missing required argument: <username>"
     username="${1-}"
-    sshcmd="${username-}@${host}"
+    sshcmd="${username-}@${host} -p 8080"
     # Use the ssh identity_file if provided
     [ -n "${identity_file}" ] && sshcmd="${sshcmd} -i ${identity_file}"
     return 0
