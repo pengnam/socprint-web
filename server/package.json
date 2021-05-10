@@ -6,11 +6,13 @@
     "dependencies": {
         "@types/cors": "^2.8.10",
         "@types/morgan": "^1.9.2",
+        "@types/shell-quote": "^1.7.0",
         "cors": "^2.8.5",
         "express": "4.17.1",
         "express-fileupload": "^1.2.1",
         "morgan": "^1.10.0",
-        "multer": "^1.4.2"
+        "multer": "^1.4.2",
+        "shell-quote": "^1.7.2"
     },
     "devDependencies": {
         "@types/express": "^4.17.11",
