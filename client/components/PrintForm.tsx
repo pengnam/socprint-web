@@ -53,16 +53,16 @@ function PrintForm() {
      <>
      <form onSubmit={handleSubmit(onSubmit)} >
        <label htmlFor="sunfire_id">sunfire id</label>
-       <input {...register('sunfire_id')} type="text" disabled={submitting}/>
+       <input {...register('sunfire_id', {required:true, maxLength: 80})} type="text" disabled={submitting}/>
        <br/>
        <label htmlFor="password">password</label>
-       <input {...register('password')} type="password" disabled={submitting}/>
+       <input {...register('password', {required:true, maxLength: 80})} type="password" disabled={submitting}/>
        <br/>
        <label htmlFor="printer">printer</label>
-       <input {...register('printer')} type="text" disabled={submitting}/>
+       <input {...register('printer', {required: true, maxLength: 10})} type="text" disabled={submitting}/>
        <br/>
        <label htmlFor="file">file</label>
-       <input {...register('file')} type="file" disabled={submitting}/>
+       <input {...register('file', {required: true})} type="file" disabled={submitting}/>
        <br/>
        <button disabled={submitting}>Submit</button>
      </form>
