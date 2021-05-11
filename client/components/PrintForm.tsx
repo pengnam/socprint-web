@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form'
 import Api from './api';
 import {useState} from "react";
+import axios from "axios";
 
 function PrintForm() {
   const { register, handleSubmit } = useForm()
 
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const onSubmit = async (data: any) => {
      console.log(data);
@@ -15,14 +18,32 @@ function PrintForm() {
      formData.append("printer", data.printer)
      formData.append("file", data.file[0])
      setSubmitting(true);
-     const res = await fetch(Api.printUrl(), {
-       method: "POST",
-       body: formData
-     }).then(res => {setSubmitting(false);return res.json()});
-     alert(JSON.stringify(res))
+     axios({
+      method: 'post',
+      url: Api.printUrl(),
+      data: formData
+    })
+     .then(res => {
+       setSubmitting(false);
+       setSuccessMessage(JSON.stringify(res.data));
+      })
+     .catch(error => {
+       if (error.response) {
+         // Request sent, but error code falls outside 2XX
+        setSubmitting(false);
+        setErrorMessage("Request failed: " + error.response.data);
+       } else if (error.request) {
+         // Request sent but to response received
+         setErrorMessage("Response not received" + error.request.json())
+       } else {
+         // Some other internal error, likely on client side
+         setErrorMessage("Client-side error, please contact admin.\n" + error.config)
+       }
+      })
   }
 
    return (
+     <>
      <form onSubmit={handleSubmit(onSubmit)} >
        <label htmlFor="sunfire_id">sunfire id</label>
        <input {...register('sunfire_id')} type="text" disabled={submitting}/>
@@ -38,6 +59,10 @@ function PrintForm() {
        <br/>
        <button disabled={submitting}>Submit</button>
      </form>
+     {errorMessage && <div className="alert">{errorMessage}</div>}
+     {successMessage && <div className="alert">{successMessage}</div>}
+     </>
+
    );
 }
 

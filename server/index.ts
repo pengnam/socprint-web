@@ -1,6 +1,4 @@
 import express, { Request, Response, NextFunction } from 'express';
-// rest of the code remains same
-
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import morgan from "morgan";
@@ -16,46 +14,36 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(morgan("common"))
-
+//TODO: Try useTempFiles option
 app.use(fileUpload({
   createParentPath: true
 }))
 const PORT = 8000;
 
-app.get("/test", async (req:Request, res:Response) => {
+app.get("/test", async (req: Request, res: Response) => {
   res.send("its working")
 })
 
-app.post("/print", async (req:Request, res:Response) => {
+app.post("/print", async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.files) {
+    res.status(400).send("No files sent for printing")
+    return;
+  }
+
+  const file = req.files.file;
+  if (Array.isArray(file)) {
+    res.status(400).send("Expected single file")
+    return;
+  }
+
   try {
-    if(!req.files){
-      res.send({
-        status: false,
-        message: "No files"
-      })
-      return;
-    } else {
-      const file = req.files.file;
-      if (Array.isArray(file)) {
-      res.send({
-        status: false,
-        message: "Expected single file"
-      })
-      return;
-      } else {
-        const newFilePath = `${UPLOAD_PATH}/${file.name}`
-        await file.mv(newFilePath);
-        const result = await SocPrintCommands.print({sunfireId: req.body.sunfire_id, password: req.body.password}, req.body.printer, newFilePath);
-        fs.unlinkSync(newFilePath)
-        res.send({
-          status: true,
-          message: result
-        })
-      }
-    }
+    const newFilePath = `${UPLOAD_PATH}/${file.name}`
+    await file.mv(newFilePath);
+    const result = await SocPrintCommands.print({ sunfireId: req.body.sunfire_id, password: req.body.password }, req.body.printer, newFilePath);
+    fs.unlinkSync(newFilePath)
+    res.send(result)
   } catch (e) {
-    console.log(e);
-    res.status(500).send(e)
+    res.status(500).send(e.message)
   }
 })
 
