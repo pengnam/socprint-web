@@ -10,6 +10,11 @@ function PrintForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const setStatesForNewSubmission = () => {
+    setSubmitting(true)
+    setErrorMessage("")
+    setSuccessMessage("")
+  }
   const onSubmit = async (data: any) => {
      console.log(data);
      const formData = new FormData()
@@ -17,7 +22,8 @@ function PrintForm() {
      formData.append("password", data.password)
      formData.append("printer", data.printer)
      formData.append("file", data.file[0])
-     setSubmitting(true);
+     setStatesForNewSubmission();
+     
      axios({
       method: 'post',
       url: Api.printUrl(),
@@ -34,10 +40,11 @@ function PrintForm() {
         setErrorMessage("Request failed: " + error.response.data);
        } else if (error.request) {
          // Request sent but to response received
-         setErrorMessage("Response not received" + error.request.json())
+         setSubmitting(false);
+         setErrorMessage("Response not received. Likely a connection problem.\n Contents of request:" + JSON.stringify(error.request))
        } else {
          // Some other internal error, likely on client side
-         setErrorMessage("Client-side error, please contact admin.\n" + error.config)
+         setErrorMessage("Client-side error, please contact admin.\n" + JSON.stringify(error.config))
        }
       })
   }
@@ -59,8 +66,8 @@ function PrintForm() {
        <br/>
        <button disabled={submitting}>Submit</button>
      </form>
-     {errorMessage && <div className="alert">{errorMessage}</div>}
-     {successMessage && <div className="alert">{successMessage}</div>}
+     {errorMessage && <div className="error">{errorMessage}</div>}
+     {successMessage && <div className="success">{successMessage}</div>}
      </>
 
    );

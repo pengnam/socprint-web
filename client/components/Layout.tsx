@@ -153,6 +153,26 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           font-size: 16px;
           margin-bottom: 20px;
         }
+        /*https://codepen.io/palimadra/pen/OVvbaY*/
+        .success, .error {
+          border: 1px solid;
+          margin: 10px 0px;
+          padding: 15px 10px 15px 50px;
+          background-repeat: no-repeat;
+          background-position: 10px center;
+        }
+    
+        .success {
+          color: #4F8A10;
+          background-color: #DFF2BF;
+          background-image: url('https://i.imgur.com/Q9BGTuy.png');
+        }
+    
+        .error{
+          color: #D8000C;
+          background-color: #FFBABA;
+          background-image: url('https://i.imgur.com/GnyDvKN.png');
+        }
       `}</style>
   </div>
 )

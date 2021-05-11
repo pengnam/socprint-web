@@ -20,11 +20,11 @@ app.use(fileUpload({
 }))
 const PORT = 8000;
 
-app.get("/test", async (req: Request, res: Response) => {
-  res.send("its working")
+app.get("/ping", async (req: Request, res: Response) => {
+  res.send("pong")
 })
 
-app.post("/print", async (req: Request, res: Response, next: NextFunction) => {
+app.post("/print", async (req: Request, res: Response) => {
   if (!req.files) {
     res.status(400).send("No files sent for printing")
     return;
