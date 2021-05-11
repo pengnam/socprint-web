@@ -160,6 +160,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           padding: 15px 10px 15px 50px;
           background-repeat: no-repeat;
           background-position: 10px center;
+          white-space: pre;
         }
     
         .success {
