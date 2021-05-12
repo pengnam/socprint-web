@@ -39,7 +39,7 @@ function PrintForm() {
         setSubmitting(false);
         setErrorMessage("Request failed: " + error.response.data);
        } else if (error.request) {
-         // Request sent but to response received
+         // Request sent but no response received
          setSubmitting(false);
          setErrorMessage("Response not received. Likely a connection problem.\n Contents of request:" + JSON.stringify(error.request))
        } else {
