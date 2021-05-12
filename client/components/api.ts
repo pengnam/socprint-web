@@ -13,8 +13,9 @@ class Api {
     static printUrl(): string {
         return `${Api.baseUrl()}/print`
     } 
-    static quotaUrl(): string {
-        return `${Api.baseUrl()}/quota`
+    
+    static sunfireUpUrl(): string {
+        return `${Api.baseUrl()}/sunfire_up`
     } 
 }
 

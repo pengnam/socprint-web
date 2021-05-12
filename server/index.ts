@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import fs from "fs";
 import SocPrintCommands from "./socprint-commands";
+import ServerStatus from "./sever_status";
 
 
 const UPLOAD_PATH = "./uploads"
@@ -22,6 +23,11 @@ const PORT = 8000;
 
 app.get("/ping", async (req: Request, res: Response) => {
   res.send("pong")
+})
+
+app.get("/sunfire_up", async (req: Request, res: Response) => {
+  // Checks the tunnel connection between sunfire and DO
+  res.send(await ServerStatus.get_server_status());
 })
 
 app.post("/print", async (req: Request, res: Response) => {

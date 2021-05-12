@@ -160,19 +160,47 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           padding: 15px 10px 15px 50px;
           background-repeat: no-repeat;
           background-position: 10px center;
+          white-space: pre;
         }
     
         .success {
           color: #4F8A10;
-          background-color: #DFF2BF;
+          background: #DFF2BF;
           background-image: url('https://i.imgur.com/Q9BGTuy.png');
         }
     
         .error{
-          color: #D8000C;
-          background-color: #FFBABA;
+          background: #c33;
+          color: #fff;
           background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
+
+        /* For status bar*/
+        .loading, .online, .offline {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 2.5rem;
+          padding: 0 1rem;
+          align-items:center;
+          display: flex;
+          justify-content: center;
+        
+        }
+        .loading {
+          color: #00529B;
+          background: #BDE5F8;
+        }
+
+        .offline {
+          background: #c33;
+          color: #fff;
+        }
+        .online {
+          background: #4F8A10;
+          color:#DFF2BF
+        }
+        
       `}</style>
   </div>
 )
