@@ -6,6 +6,15 @@ function promised_exec(command:string):PromiseWithChild<{stdout:string, stderr:s
     return promisify(exec)(command, { encoding: 'utf-8' });
 }
 
+async function run_command(command: string):Promise<string> {
+    const {stdout, stderr} = await promised_exec(command)
+    let output:string = "";
+    if (stdout) { output += `stdout:${stdout}` }
+    if (stderr) { output += `stderr:${stderr}`}
+    return output;
+};
+
 export {
-    promised_exec
+    promised_exec,
+    run_command
 }
