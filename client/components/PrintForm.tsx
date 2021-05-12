@@ -41,7 +41,7 @@ function PrintForm() {
        } else if (error.request) {
          // Request sent but no response received
          setSubmitting(false);
-         setErrorMessage("Response not received. Likely a connection problem.\n Contents of request:" + JSON.stringify(error.request))
+         setErrorMessage("Response not received.\n If sunfire connection is up, your credentials are likely to be incorrect.\n Otherwise, its likely a connection problem.\n Contents of request:" + JSON.stringify(error.request))
        } else {
          // Some other internal error, likely on client side
          setErrorMessage("Client-side error, please contact admin.\n" + JSON.stringify(error.config))

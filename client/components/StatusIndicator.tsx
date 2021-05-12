@@ -31,7 +31,7 @@ function StatusIndicator() {
     {status === ServerStatus.Loading && <div className="loading">Checking Server Status</div>} 
     {status === ServerStatus.ServerOffline&& <div className="offline">Server Offline</div>} 
     {status === ServerStatus.SunfireOffline && <div className="offline">Sunfire Connection Offline</div>} 
-    {status === ServerStatus.Online && display && <div className="online">Server Online</div>} 
+    {status === ServerStatus.Online && display && <div className="online">Sunfire Connection Online</div>} 
     </>
 }
 export default StatusIndicator;

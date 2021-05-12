@@ -76,22 +76,6 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           line-height: 1.5;
           font-size: 1.5rem;
         }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          max-width: 800px;
-          margin-top: 3rem;
-        }
         .card {
           margin: 1rem;
           flex-basis: 45%;
@@ -117,15 +101,6 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           margin: 0;
           font-size: 1.25rem;
           line-height: 1.5;
-        }
-        .logo {
-          height: 1em;
-        }
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
         }
         html,
         body {
@@ -165,13 +140,13 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     
         .success {
           color: #4F8A10;
-          background: #DFF2BF;
+          background-color: #DFF2BF;
           background-image: url('https://i.imgur.com/Q9BGTuy.png');
         }
     
         .error{
-          background: #c33;
-          color: #fff;
+          color: #D8000C;
+          background-color: #FFBABA;
           background-image: url('https://i.imgur.com/GnyDvKN.png');
         }
 
