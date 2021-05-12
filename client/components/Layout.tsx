@@ -200,6 +200,16 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           background: #4F8A10;
           color:#DFF2BF
         }
+
+        .submitButton {
+          align-items:flex-start;
+          color:#fff;
+          width:100%;
+          padding: 0.5rem;
+          background: #0070f3;
+          border-color: #0070f3;
+
+        }
         
       `}</style>
   </div>

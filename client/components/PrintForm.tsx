@@ -64,7 +64,7 @@ function PrintForm() {
        <label htmlFor="file">file</label>
        <input {...register('file', {required: true})} type="file" disabled={submitting}/>
        <br/>
-       <button disabled={submitting}>Submit</button>
+       <button className="submitButton" disabled={submitting}>SUBMIT</button>
      </form>
      {errorMessage && <div className="error">{errorMessage}</div>}
      {successMessage && <div className="success">{successMessage}</div>}
