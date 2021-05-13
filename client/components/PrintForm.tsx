@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
+import { ErrorMessage } from '@hookform/error-message';
 import Api from './api';
-import {useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 function PrintForm() {
-  const { register, handleSubmit } = useForm()
+  const { register, formState: { errors }, handleSubmit} = useForm()
 
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -51,18 +52,31 @@ function PrintForm() {
 
    return (
      <>
+
      <form onSubmit={handleSubmit(onSubmit)} >
        <label htmlFor="sunfire_id">sunfire id</label>
-       <input {...register('sunfire_id', {required:true, maxLength: 80})} type="text" disabled={submitting}/>
+       <input {...register('sunfire_id', {
+         required: "This is required",
+         maxLength: {value:80, message: "Max length of 80 characters"},
+         pattern: {value:/^[A-Za-z]+$/, message: "Letters only"}
+         })} type="text" disabled={submitting}/>
+       <ErrorMessage errors={errors} name="sunfire_id"/>
        <br/>
        <label htmlFor="password">password</label>
-       <input {...register('password', {required:true, maxLength: 80})} type="password" disabled={submitting}/>
+       <input {...register('password', {
+         required: "This is required",
+         maxLength: {value:80, message: "Max length of 80 characters"},
+         pattern: {value:/^[\x00-\x7F]+$/, message: "Only ASCII characters allowed"}
+         })} type="password" disabled={submitting}/>
+       <ErrorMessage errors={errors} name="password" key="password" as="div" />
        <br/>
        <label htmlFor="printer">printer</label>
        <input {...register('printer', {required: true, maxLength: 10})} type="text" disabled={submitting}/>
+       <ErrorMessage errors={errors} name="printer" as="span" />
        <br/>
        <label htmlFor="file">file</label>
        <input {...register('file', {required: true})} type="file" disabled={submitting}/>
+       <ErrorMessage errors={errors} name="file" as="span" />
        <br/>
        <button className="submitButton" disabled={submitting}>SUBMIT</button>
      </form>
