@@ -5,6 +5,9 @@ import morgan from "morgan";
 import fs from "fs";
 import SocPrintCommands from "./socprint-commands";
 import ServerStatus from "./sever_status";
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 
 const UPLOAD_PATH = "./uploads"
@@ -26,7 +29,7 @@ app.get("/ping", async (req: Request, res: Response) => {
 })
 
 app.get("/sunfire_up", async (req: Request, res: Response) => {
-  // Checks the tunnel connection between sunfire and DO
+  // Checks the tunnel connection between sunfire and DO is running
   res.send(await ServerStatus.get_server_status());
 })
 
@@ -52,6 +55,9 @@ app.post("/print", async (req: Request, res: Response) => {
     res.status(500).send(e.message)
   }
 })
+
+//Keep_alive service needed to keep the ssh connection running
+ServerStatus.start_keep_alive_service();
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at port ${PORT}`);
