@@ -16,7 +16,7 @@ class Api {
     
     static sunfireUpUrl(): string {
         return `${Api.baseUrl()}/sunfire_up`
-    } 
+   } 
 }
 
 export default Api;

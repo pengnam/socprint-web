@@ -7,6 +7,7 @@ import axios from "axios";
 const PRINTER_COM1_BASEMENT = ["psc008", "psc011"]
 const PRINTER_COM1_TECH_SERVICES = ["psts", "pstb", "pstc"]
 const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM1_TECH_SERVICES]
+
 function PrintForm() {
   const { register, formState: { errors }, handleSubmit} = useForm()
 
@@ -25,6 +26,7 @@ function PrintForm() {
      formData.append("sunfire_id", data.sunfire_id)
      formData.append("password", data.password)
      formData.append("printer", data.printer)
+     formData.append("side", data.side)
      formData.append("file", data.file[0])
      setStatesForNewSubmission();
      
@@ -89,6 +91,16 @@ function PrintForm() {
        <ErrorMessage errors={errors} name="printer"  as="span"/>
       <div className="help">Basement: {PRINTER_COM1_BASEMENT.join(", ")}</div>
       <div className="help">Level 1: {PRINTER_COM1_TECH_SERVICES.join(", ")}</div>
+       <br/>
+       <label htmlFor="side">side</label>
+       <select {...register('side', {
+         minLength: {value: 1, message: "This is required"},
+         required: "This is required"}
+         )} disabled={submitting}>
+          <option key="double-sided" value="-dx"> double-sided </option>
+          <option key="single-sided" value="-sx"> single-sided </option>
+      </select>
+       <ErrorMessage errors={errors} name="side"  as="span"/>
        <br/>
        <label htmlFor="file">file</label>
        <input {...register('file', {required: "Please upload a file"})} type="file" disabled={submitting}/>
