@@ -102,6 +102,16 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           font-size: 1.25rem;
           line-height: 1.5;
         }
+        /*Error Message*/
+        .card span {
+          font-size: 1rem;
+          color:red;
+        }
+        .card .help {
+          font-size:0.75rem;
+          left:100px;
+          position:relative;
+        }
         html,
         body {
           padding: 0;

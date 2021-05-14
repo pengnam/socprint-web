@@ -5,8 +5,8 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const PRINTER_COM1_BASEMENT = ["psc008", "psc011"]
-const PRINTER_COM2_BASEMENT = ["psts", "pstb", "pstc"]
-const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM2_BASEMENT]
+const PRINTER_COM1_TECH_SERVICES = ["psts", "pstb", "pstc"]
+const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM1_TECH_SERVICES]
 function PrintForm() {
   const { register, formState: { errors }, handleSubmit} = useForm()
 
@@ -63,7 +63,8 @@ function PrintForm() {
          maxLength: {value:80, message: "Max length of 80 characters"},
          pattern: {value:/^[A-Za-z]+$/, message: "Letters only"}
          })} type="text" disabled={submitting}/>
-       <ErrorMessage errors={errors} name="sunfire_id"/>
+       <ErrorMessage errors={errors} name="sunfire_id" as="span"/>
+      <div className="help">[sunfire_id]@comp.nus.edu.sg</div>
        <br/>
        <label htmlFor="password">password</label>
        <input {...register('password', {
@@ -71,22 +72,26 @@ function PrintForm() {
          maxLength: {value:80, message: "Max length of 80 characters"},
          pattern: {value:/^[\x00-\x7F]+$/, message: "Only ASCII characters allowed"}
          })} type="password" disabled={submitting}/>
-       <ErrorMessage errors={errors} name="password" key="password" as="div" />
+       <ErrorMessage errors={errors} name="password" key="password" as="span" />
        <br/>
        <label htmlFor="printer">printer</label>
        <select {...register('printer', {
-         required: "This is required"})} disabled={submitting}>
-         <option hidden disabled selected> -- select an option -- </option>
+         minLength: {value: 1, message: "This is required"},
+         required: "This is required"}
+         )} disabled={submitting}>
+         <option hidden disabled selected></option>
         {PRINTER_OPTIONS.map(value => (
           <option key={value} value={value}>
             {value}
           </option>
         ))}
       </select>
-       <ErrorMessage errors={errors} name="printer" as="span" />
+       <ErrorMessage errors={errors} name="printer"  as="span"/>
+      <div className="help">Basement: {PRINTER_COM1_BASEMENT.join(", ")}</div>
+      <div className="help">Level 1: {PRINTER_COM1_TECH_SERVICES.join(", ")}</div>
        <br/>
        <label htmlFor="file">file</label>
-       <input {...register('file', {required: true})} type="file" disabled={submitting}/>
+       <input {...register('file', {required: "Please upload a file"})} type="file" disabled={submitting}/>
        <ErrorMessage errors={errors} name="file" as="span" />
        <br/>
        <button className="submitButton" disabled={submitting}>SUBMIT</button>
