@@ -9,7 +9,6 @@ const IndexPage: FC = (): ReactElement => (
     <div className="container">
         <h1 className="title">SOCprint</h1>
         <h2 className="description">Using a <a href="https://github.com/dlqs/SOCprint">POSIX™-compliant, zero-dependency shell script</a> to print stuff in NUS SoC</h2>
-        
           <div className="card">
           <PrintForm/>
         </div>

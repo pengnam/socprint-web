@@ -4,6 +4,9 @@ import Api from './api';
 import React, {useState} from "react";
 import axios from "axios";
 
+const PRINTER_COM1_BASEMENT = ["psc008", "psc011"]
+const PRINTER_COM2_BASEMENT = ["psts", "pstb", "pstc"]
+const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM2_BASEMENT]
 function PrintForm() {
   const { register, formState: { errors }, handleSubmit} = useForm()
 
@@ -71,7 +74,15 @@ function PrintForm() {
        <ErrorMessage errors={errors} name="password" key="password" as="div" />
        <br/>
        <label htmlFor="printer">printer</label>
-       <input {...register('printer', {required: true, maxLength: 10})} type="text" disabled={submitting}/>
+       <select {...register('printer', {
+         required: "This is required"})} disabled={submitting}>
+         <option hidden disabled selected> -- select an option -- </option>
+        {PRINTER_OPTIONS.map(value => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
+      </select>
        <ErrorMessage errors={errors} name="printer" as="span" />
        <br/>
        <label htmlFor="file">file</label>
