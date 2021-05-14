@@ -56,8 +56,6 @@ app.post("/print", async (req: Request, res: Response) => {
   }
 })
 
-//Keep_alive service needed to keep the ssh connection running
-ServerStatus.start_keep_alive_service();
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at port ${PORT}`);
