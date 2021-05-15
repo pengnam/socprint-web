@@ -28,6 +28,7 @@
     },
     "scripts": {
         "start": "nodemon index.ts",
+        "tunnel": "./scripts/tunnel_dev.sh",
         "build": "tsc --project ./",
         "lint": "eslint . --ext .ts"
 
