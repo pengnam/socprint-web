@@ -22,7 +22,6 @@ function PrintForm() {
     const [password, setPassword] = useStateWithLocalStorage<string>('password');
     const [sunfireId, setSunfireId] = useStateWithLocalStorage<string>('sunfire_id');
     const [printer, setPrinter] = useStateWithLocalStorage<string>('printer');
-    
 
     const setStatesForNewSubmission = () => {
         setSubmitting(true);
@@ -108,7 +107,9 @@ function PrintForm() {
                     })}
                     disabled={submitting}
                 >
-                    <option hidden disabled selected>{printer}</option>
+                    <option hidden disabled selected>
+                        {printer}
+                    </option>
                     {PRINTER_OPTIONS.map((value) => (
                         <option key={value} value={value}>
                             {value}
