@@ -1,0 +1,12 @@
+[Unit]
+Description = SOCprint service 
+After = network.target
+
+[Service]
+Restart=on-failure
+RestartSec=30
+User=root
+ExecStart = /bin/bash /root/socprint-web/server/scripts/start_prod_server.sh
+
+[Install]
+WantedBy = multi-user.target
