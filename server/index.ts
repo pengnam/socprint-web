@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import fs from "fs";
 import SocPrintCommands from "./socprint-commands";
-import ServerStatus from "./sever_status";
+import ServerStatus from "./sever-status";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
