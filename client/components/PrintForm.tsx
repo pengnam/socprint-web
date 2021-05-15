@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import Api from './api';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import useStateWithLocalStorage from './use-local-storage';
 
 const PRINTER_COM1_BASEMENT = ['psc008', 'psc011'];
 const PRINTER_COM1_TECH_SERVICES = ['psts', 'pstb', 'pstc'];
@@ -18,6 +19,10 @@ function PrintForm() {
     const [submitting, setSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [password, setPassword] = useStateWithLocalStorage('password');
+    const [sunfireId, setSunfireId] = useStateWithLocalStorage('sunfire_id');
+    const [printer, setPrinter] = useStateWithLocalStorage('printer');
+    
 
     const setStatesForNewSubmission = () => {
         setSubmitting(true);
@@ -28,8 +33,11 @@ function PrintForm() {
         console.log(data);
         const formData = new FormData();
         formData.append('sunfire_id', data.sunfire_id);
+        setSunfireId(data.sunfire_id);
         formData.append('password', data.password);
+        setPassword(data.password);
         formData.append('printer', data.printer);
+        setPrinter(data.printer);
         formData.append('side', data.side);
         formData.append('file', data.file[0]);
         setStatesForNewSubmission();
@@ -72,6 +80,7 @@ function PrintForm() {
                         maxLength: { value: 80, message: 'Max length of 80 characters' },
                         pattern: { value: /^[A-Za-z]+$/, message: 'Letters only' },
                     })}
+                    defaultValue={sunfireId}
                     type="text"
                     disabled={submitting}
                 />
@@ -85,6 +94,7 @@ function PrintForm() {
                         maxLength: { value: 80, message: 'Max length of 80 characters' },
                         pattern: { value: /^[\x00-\x7F]+$/, message: 'Only ASCII characters allowed' },
                     })}
+                    defaultValue={password}
                     type="password"
                     disabled={submitting}
                 />
@@ -98,7 +108,7 @@ function PrintForm() {
                     })}
                     disabled={submitting}
                 >
-                    <option hidden disabled selected></option>
+                    <option hidden disabled selected>{printer}</option>
                     {PRINTER_OPTIONS.map((value) => (
                         <option key={value} value={value}>
                             {value}
