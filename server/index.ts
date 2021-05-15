@@ -51,15 +51,18 @@ app.post("/print", async (req: Request, res: Response) => {
   }
   const printer = req.body.printer + req.body.side;
 
+  const newFilePath = `${UPLOAD_PATH}/${file.name}`
+  await file.mv(newFilePath);
   try {
-    const newFilePath = `${UPLOAD_PATH}/${file.name}`
-    await file.mv(newFilePath);
     const result = await SocPrintCommands.print({ sunfireId: req.body.sunfire_id, password: req.body.password }, printer, newFilePath);
-    fs.unlinkSync(newFilePath)
     res.send(result)
   } catch (e) {
     res.status(500).send(e.message)
+  } finally {
+    fs.unlinkSync(newFilePath)
   }
+
+  
 })
 
 
