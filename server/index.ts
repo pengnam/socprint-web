@@ -45,10 +45,16 @@ app.post("/print", async (req: Request, res: Response) => {
     return;
   }
 
+  if (!req.body.side || !req.body.printer) {
+    res.status(400).send("Printer and side needs to be specified")
+    return;
+  }
+  const printer = req.body.printer + req.body.side;
+
   try {
     const newFilePath = `${UPLOAD_PATH}/${file.name}`
     await file.mv(newFilePath);
-    const result = await SocPrintCommands.print({ sunfireId: req.body.sunfire_id, password: req.body.password }, req.body.printer, newFilePath);
+    const result = await SocPrintCommands.print({ sunfireId: req.body.sunfire_id, password: req.body.password }, printer, newFilePath);
     fs.unlinkSync(newFilePath)
     res.send(result)
   } catch (e) {
