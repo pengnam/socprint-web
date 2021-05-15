@@ -6,9 +6,9 @@ const SOCPRINT_COMMAND = "./socprint.sh"
 const SSH_PASS_COMMAND = "sshpass"
 const SSH_PASS_FLAG = "-p"
 
-function form_command(credentials: Credentials, option: SocprintCommandOptions, ...args:any[] ): string  {
+function form_command(credentials: Credentials, option: SocprintCommandOptions, ...args:string[] ): string  {
     return quote([SSH_PASS_COMMAND, SSH_PASS_FLAG, credentials.password, SOCPRINT_COMMAND, option, credentials.sunfireId, ...args ]);
-};
+}
 
 enum SocprintCommandOptions {
     Help = "help",

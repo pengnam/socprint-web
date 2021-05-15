@@ -37,7 +37,7 @@ class ServerStatus {
         }
     }
 
-    static async start_keep_alive_service() {
+    static async start_keep_alive_service():Promise<void> {
         this.send_keep_alive().then((res)=>console.log("SSH alive: " + res));
         setTimeout(this.start_keep_alive_service, KEEP_ALIVE_INTERVAL);
     }

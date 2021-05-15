@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response} from 'express';
 import fileUpload from "express-fileupload";
 import cors from "cors";
 import morgan from "morgan";
@@ -33,7 +33,7 @@ app.get("/sunfire_up", async (req: Request, res: Response) => {
   res.send(await ServerStatus.get_server_status());
 })
 
-app.post("/print", async (req: Request, res: Response) => {
+app.post("/print", async (req: Request, res: Response):Promise<void> => {
   if (!req.files) {
     res.status(400).send("No files sent for printing")
     return;
@@ -61,8 +61,6 @@ app.post("/print", async (req: Request, res: Response) => {
   } finally {
     fs.unlinkSync(newFilePath)
   }
-
-  
 })
 
 
