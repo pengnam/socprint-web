@@ -19,9 +19,9 @@ function PrintForm() {
     const [submitting, setSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-    const [password, setPassword] = useStateWithLocalStorage('password');
-    const [sunfireId, setSunfireId] = useStateWithLocalStorage('sunfire_id');
-    const [printer, setPrinter] = useStateWithLocalStorage('printer');
+    const [password, setPassword] = useStateWithLocalStorage<string>('password');
+    const [sunfireId, setSunfireId] = useStateWithLocalStorage<string>('sunfire_id');
+    const [printer, setPrinter] = useStateWithLocalStorage<string>('printer');
     
 
     const setStatesForNewSubmission = () => {
