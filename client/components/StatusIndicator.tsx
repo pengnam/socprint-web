@@ -9,7 +9,7 @@ enum ServerStatus {
     Loading,
 }
 
-function StatusIndicator(): React.FC<null> {
+function StatusIndicator() {// eslint-disable-line
     const [status, setStatus] = useState(ServerStatus.Loading);
     const [display, setDisplay] = useState(true);
 

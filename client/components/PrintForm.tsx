@@ -9,7 +9,7 @@ const PRINTER_COM1_BASEMENT = ['psc008', 'psc011'];
 const PRINTER_COM1_TECH_SERVICES = ['psts', 'pstb', 'pstc'];
 const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM1_TECH_SERVICES];
 
-function PrintForm(): React.FC<null> {
+function PrintForm() {// eslint-disable-line
     const {
         register,
         formState: { errors },
