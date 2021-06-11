@@ -32,6 +32,5 @@
         "build": "tsc --project ./",
         "install-hook": "cp ./scripts/pre-push ../.git/hooks/; chmod +x ../.git/hooks/pre-push",
         "lint": "eslint . --ext .ts"
-
     }
 }
