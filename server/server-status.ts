@@ -2,6 +2,7 @@ import {promised_exec} from "./util";
 
 
 const KEEP_ALIVE_INTERVAL = 15 * 1000;
+const STATUS_INTERVAL = 5 * 1000;
 
 interface ServerStatusInfo {
     last_check_time: number,
@@ -15,8 +16,8 @@ class ServerStatus {
     };
     static async get_server_status(): Promise<boolean> {
         const curr_time = Date.now();
-        // Checked within the last 5s
-        if (curr_time - this.info.last_check_time <= 5*1000) {
+        // Freshed if wasn't checked within the last STATUS_INTERVAL
+        if (curr_time - this.info.last_check_time > STATUS_INTERVAL) {
             this.info.is_up = await this.get_server_status_helper();
             this.info.last_check_time = curr_time;
         }
