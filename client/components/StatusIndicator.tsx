@@ -9,7 +9,7 @@ enum ServerStatus {
     Loading,
 }
 
-function StatusIndicator() {
+function StatusIndicator(): React.FC<null> {
     const [status, setStatus] = useState(ServerStatus.Loading);
     const [display, setDisplay] = useState(true);
 
@@ -24,7 +24,7 @@ function StatusIndicator() {
             .then((res) => {
                 res.data ? setOnline() : setStatus(ServerStatus.SunfireOffline);
             })
-            .catch((_) => {
+            .catch(() => {
                 setStatus(ServerStatus.ServerOffline);
             });
     }, []);
