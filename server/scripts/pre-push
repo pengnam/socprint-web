@@ -25,23 +25,23 @@ do
         cd server; yarn lint
         if [ $? -ne 0 ]
         then
-            echo >&2 "lint failed, not pushing"
+            echo >&2 "server lint failed, not pushing"
             exit 1
         fi
         cd ..
         cd client; yarn lint
         if [ $? -ne 0 ]
         then
-            echo >&2 "lint failed, not pushing"
+            echo >&2 "client lint failed, not pushing"
             exit 1
         fi
         yarn tsc
         if [ $? -ne 0 ]
         then
-            echo >&2 "typescript check failed"
+            echo >&2 "client typescript check failed"
             exit 1
         fi
-        echo "no lint errors found"
+        echo "no lint errors found in project"
     fi
 done
 
