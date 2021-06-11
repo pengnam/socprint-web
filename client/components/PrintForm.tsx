@@ -29,7 +29,8 @@ function PrintForm(): React.ReactElement {
         setSuccessMessage('');
     };
 
-    const onSubmit = async (data) => {
+    // prettier-ignore
+    const onSubmit = async (data: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
         const formData = new FormData();
         formData.append('sunfire_id', data.sunfire_id);
         setSunfireId(data.sunfire_id);
