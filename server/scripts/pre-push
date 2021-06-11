@@ -12,16 +12,7 @@ do
         # Handle delete
         :
     else
-        if test "$remote_oid" = "$zero"
-        then
-            # New branch, examine all commits
-            range="$local_oid"
-        else
-            # Update to existing branch, examine new commits
-            range="$remote_oid..$local_oid"
-        fi
-
-        # Check for WIP commit
+        # perform lint checks
         cd server; yarn lint
         if [ $? -ne 0 ]
         then
