@@ -28,12 +28,17 @@ do
             echo >&2 "lint failed, not pushing"
             exit 1
         fi
-        echo "no lint errors found"
         cd ..
         cd client; yarn lint
         if [ $? -ne 0 ]
         then
             echo >&2 "lint failed, not pushing"
+            exit 1
+        fi
+        yarn tsc
+        if [ $? -ne 0 ]
+        then
+            echo >&2 "typescript check failed"
             exit 1
         fi
         echo "no lint errors found"
