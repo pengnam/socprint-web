@@ -12,7 +12,7 @@ class ServerStatus {
     static info:ServerStatusInfo = {
         last_check_time: 0,
         is_up: true
-    }
+    };
     static async get_server_status(): Promise<boolean> {
         const curr_time = Date.now();
         // Checked within the last 5s
