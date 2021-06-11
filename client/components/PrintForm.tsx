@@ -28,8 +28,8 @@ function PrintForm(): React.FC<null> {
         setErrorMessage('');
         setSuccessMessage('');
     };
-    const onSubmit = async (data: any) => {
-        console.log(data);
+    // prettier-ignore
+    const onSubmit = async (data: any) => { // eslint-disable-line 
         const formData = new FormData();
         formData.append('sunfire_id', data.sunfire_id);
         setSunfireId(data.sunfire_id);
