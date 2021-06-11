@@ -2,13 +2,10 @@ import express, { Request, Response } from 'express';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import morgan from 'morgan';
-import fs from 'fs';
-import SocPrintCommands from './socprint-commands';
 import ServerStatus from './server-status';
 import * as dotenv from 'dotenv';
+import PrintJob from './printjob';
 dotenv.config();
-
-const UPLOAD_PATH = './uploads';
 
 const app = express();
 app.use(cors());
@@ -33,36 +30,33 @@ app.get('/sunfire_up', async (req: Request, res: Response) => {
 });
 
 app.post('/print', async (req: Request, res: Response): Promise<void> => {
-    if (!req.files) {
+    const {
+        files,
+        body: { sunfire_id, password, side, printer },
+    } = req;
+
+    if (!files) {
         res.status(400).send('No files sent for printing');
         return;
     }
 
-    const file = req.files.file;
+    const file = files.file;
     if (Array.isArray(file)) {
         res.status(400).send('Expected single file');
         return;
     }
 
-    if (!req.body.side || !req.body.printer) {
+    if (!side || !printer) {
         res.status(400).send('Printer and side needs to be specified');
         return;
     }
-    const printer = req.body.printer + req.body.side;
 
-    const newFilePath = `${UPLOAD_PATH}/${file.name}`;
-    await file.mv(newFilePath);
+    const printJob = new PrintJob(sunfire_id, password, file, printer, side);
     try {
-        const result = await SocPrintCommands.print(
-            { sunfireId: req.body.sunfire_id, password: req.body.password },
-            printer,
-            newFilePath,
-        );
+        const result = await printJob.submit();
         res.send(result);
     } catch (e) {
         res.status(500).send(e.message);
-    } finally {
-        fs.unlinkSync(newFilePath);
     }
 });
 
