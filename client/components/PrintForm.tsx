@@ -9,7 +9,7 @@ const PRINTER_COM1_BASEMENT = ['psc008', 'psc011'];
 const PRINTER_COM1_TECH_SERVICES = ['psts', 'pstb', 'pstc'];
 const PRINTER_OPTIONS = [...PRINTER_COM1_BASEMENT, ...PRINTER_COM1_TECH_SERVICES];
 
-function PrintForm() {
+function PrintForm(): React.ReactElement {
     const {
         register,
         formState: { errors },
@@ -28,8 +28,8 @@ function PrintForm() {
         setErrorMessage('');
         setSuccessMessage('');
     };
-    const onSubmit = async (data: any) => {
-        console.log(data);
+
+    const onSubmit = async (data) => {
         const formData = new FormData();
         formData.append('sunfire_id', data.sunfire_id);
         setSunfireId(data.sunfire_id);
